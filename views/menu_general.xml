@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="immatriculation_menu_root"  name="Immatriculation" web_icon="immatriculation/static/description/icon.png" sequence="1"/>
+    <menuitem id="immatriculation_configuration" parent="immatriculation_menu_root" name="Configuration" sequence="20"/>
+
+</odoo>

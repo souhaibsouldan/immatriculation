@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="immatriculation.list">
+      <field name="name">immatriculation list</field>
+      <field name="model">immatriculation.fiscale</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="nom_commercial"/>
+          <field name="adresse_ets"/>
+          <field name="tel_fixe"/>
+          <field name="bp"/>
+          <field name="nif"/>
+        </list>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_immatriculation_fiscale_tree">
+        <field name="name">Contribuable</field>
+        <field name="res_model">immatriculation.fiscale</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+    </record>
+
+
+
+    <menuitem name="Lister Contribuable" id="immatriculation_tree" action="action_immatriculation_fiscale_tree" parent="immatriculation_menu_root" sequence="11"/>
+   
+  </data>
+</odoo>
