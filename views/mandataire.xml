@@ -1,0 +1,111 @@
+<odoo>
+    <record id="view_mandataire_form" model="ir.ui.view">
+        <field name="name">mandataire.form</field>
+        <field name="model">immatriculation.mandataire</field>
+        <field name="arch" type="xml">
+            <form string="Mandataire">
+                <sheet>
+                <group colspan="2"> 
+                    <group>
+                        <field name="type_mandataire"/>
+                        <field name="name"/>
+                        
+                        <field name="tel_mandataire"/>
+                        <field name="adresse_mandataire"/>
+                    </group>
+                    <group>
+                        <field name="fax_mandataire"/>
+                        <field name="mail_mandataire"/>
+                        
+                        <field name="cin_rcs_mandataire"/>
+                        <field name="identification_representant_legal"/>
+                    </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mandataire_tree" model="ir.ui.view">
+        <field name="name">mandataire.tree</field>
+        <field name="model">immatriculation.mandataire</field>
+        <field name="arch" type="xml">
+            <list string="Mandataires">
+                <field name="type_mandataire"/>
+                <field name="name"/>
+                <field name="tel_mandataire"/>
+            </list>
+        </field>
+    </record>
+
+     <record id="view_immatriculation_mandataire_kanban" model="ir.ui.view">
+        <field name="name">immatriculation.mandataire.kanban</field>
+        <field name="model">immatriculation.mandataire</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="type_mandataire">
+                <field name="name"/>
+                <field name="type_mandataire"/>
+                <field name="tel_mandataire"/>
+                <field name="mail_mandataire"/>
+                <field name="adresse_mandataire"/>
+                <field name="cin_rcs_mandataire"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record" role="listitem">
+                            <div t-attf-class="oe_kanban_card #{record.type_mandataire.raw_value == 'mandataire' ? 'border-start border-success' : 'border-start border-warning'}">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="fw-bold text-primary mb-0">
+                                        <field name="name"/>
+                                    </h6>
+                                    <span t-attf-class="badge #{record.type_mandataire.raw_value == 'mandataire' ? 'bg-success' : 'bg-warning'}">
+                                        <field name="type_mandataire"/>
+                                    </span>
+                                </div>
+                                
+                                <div class="kanban_content">
+                                    <t t-if="record.tel_mandataire.raw_value">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="fa fa-phone me-2 text-muted small"></i>
+                                            <small><field name="tel_mandataire"/></small>
+                                        </div>
+                                    </t>
+                                    
+                                    <t t-if="record.mail_mandataire.raw_value">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="fa fa-envelope me-2 text-muted small"></i>
+                                            <small>
+                                                <a t-att-href="'mailto:' + record.mail_mandataire.raw_value" class="text-decoration-none">
+                                                    <field name="mail_mandataire"/>
+                                                </a>
+                                            </small>
+                                        </div>
+                                    </t>
+                                    
+                                    <t t-if="record.cin_rcs_mandataire.raw_value">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <i class="fa fa-id-card me-2 text-muted small"></i>
+                                            <small class="text-muted">ID: <field name="cin_rcs_mandataire"/></small>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+ <record id="action_immatriculation_mandataire" model="ir.actions.act_window">
+        <field name="name">Mandataires</field>
+        <field name="res_model">immatriculation.mandataire</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+  
+    <menuitem id="immatriculation_mandataire" name="Liste Mandataires/Commissaires" parent="immatriculation_menu" action="action_immatriculation_mandataire" sequence="36"/>
+
+  </odoo>

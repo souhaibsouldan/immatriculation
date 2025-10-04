@@ -35,17 +35,6 @@ class ImmatriculationFiscale(models.Model):
         return self.env['immatriculation.fiscale']._fields['type_contribuable']._description_selection(self.env)
 
     # =========================
-    # État du dossier
-    # =========================
-    state = fields.Selection([
-        ('brouillon', 'Brouillon'),
-        ('soumis', 'Soumis'),
-        ('en_cours', 'En cours de traitement'),
-        ('approuve', 'Approuvé'),
-        ('rejete', 'Rejeté'),
-    ], string="État", default='brouillon', tracking=True, required=True)
-
-    # =========================
     # Dispositions générales
     # =========================
     nom_commercial = fields.Char("Nom commercial", tracking=True)
@@ -101,25 +90,32 @@ class ImmatriculationFiscale(models.Model):
     nationalite_societe_etrangere = fields.Many2one('res.country', string="Nationalité société étrangère")
     
     # =========================
-    # Relations améliorées
+    # Relations Activites
     # =========================
     activite_ids = fields.Many2many(
         'immatriculation.activite', 
         string="Activités exercées"
         # domain="[('type_activite', 'in', [type_contribuable, 'tous'])]"
     )
-    
-    mandataire_id = fields.Many2one(
-        'immatriculation.mandataire', 
-        string="Mandataire",
+     # =========================
+    # Relations Mandataire
+    # =========================
+    mandataire_id = fields.One2many(
+        'immatriculation.mandataire',
+        'dos_id', 
+        string="Mandataires & Commissaires",
         context={'active_test': False}
     )
 
-    contact_id = fields.Many2one(
+     # =========================
+    # Relations Contacts
+    # =========================
+    contact_id = fields.Many2many(
         'res.partner', 
         string="Contact", 
         domain="[('is_company','=',False)]",
         context={'default_type': 'contact'}
+        
     )
 
     # =========================
@@ -140,6 +136,8 @@ class ImmatriculationFiscale(models.Model):
     declaration_honneur = fields.Boolean("Déclaration sur l'honneur")
     user_id = fields.Many2one('res.users', string="Responsable", default=lambda self: self.env.user)
 
+
+
     # =========================
     # Pièces à joindre avec statut
     # =========================
@@ -149,12 +147,7 @@ class ImmatriculationFiscale(models.Model):
     contrat_bail = fields.Binary("Contrat de bail")
     lettre_engagement = fields.Binary("Lettre d'engagement")
     
-    # Statut des pièces
-    piece_cin_statut = fields.Selection([
-        ('manquant', 'Manquant'),
-        ('fourni', 'Fourni'),
-        ('verifie', 'Vérifié'),
-    ], string="Statut CIN", default='manquant')
+   
     
     # =========================
     # Pièces spécifiques Personne Morale/Succursale
@@ -297,19 +290,3 @@ class ImmatriculationFiscale(models.Model):
 
 
 
-class ImmatriculationMandataire(models.Model):
-    _name = 'immatriculation.mandataire'
-    _description = 'immatriculation.mandataire'  
-    
-    dossier_id = fields.One2many('immatriculation.fiscale','mandataire_id', string="Dossiers fiscaux")
-    nom_prenom_mandataire = fields.Char("Nom & Prénom / Dénomination sociale")
-    type_mandataire = fields.Selection([
-        ('mandataire', 'MANDATAIRE'),
-        ('commissaire', 'COMMISSAIRE AUX COMPTES'),
-    ], string="Type de mandataire", required=True)
-    adresse_mandataire = fields.Char("Adresse / Siège social")
-    tel_mandataire = fields.Char("Téléphone")
-    fax_mandataire = fields.Char("Fax")
-    mail_mandataire = fields.Char("Mail")
-    cin_rcs_mandataire = fields.Char("N° CIN ou RCS")
-    identification_representant_legal = fields.Text("Identification spécifique du représentant légal")

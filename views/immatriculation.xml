@@ -100,79 +100,39 @@
 
                          <!-- Onglet  Activites -->
                         <page string="Les Activités">
-                           
-                               
-                              
-                                 <field name="activite_ids" mode="kanban" widget="many2many_tags">
-        <kanban>
-            <field name="name"/>
-            <templates>
-                <t t-name="card">
-                    <div class="o_kanban_record">
-                        <div class="o_kanban_details">
-                            <strong><field name="name"/></strong>
-                        </div>
-                    </div>
-                </t>
-            </templates>
-        </kanban>
-    </field>
-                                    
-                               
+                            <group colspan="2"> 
+                                <group>
+                                    <field name="activite_ids" />
+                                </group>
+                            </group>  
                         </page>
 
                          <!-- Onglet  Salarier -->
                         <page string="Les Salariés">
-                            <group colspan="2">
+                            <group string="Identification des Salariers" colspan="2">
                                
                                 <group>
-                                  <field name="salarier_ids" widget="One2many_tags"/>
+                                  <field name="salarier_ids" mode="kanban"/>
                                     
                                 </group>
                             </group>
                         </page>
 
                         <!-- Onglet Mandataire -->
-                        <page string="Mandataire">
-                            <group string="Identification du Mandataire" colspan="2">
+                        <page string="Mandataire/Commissaire">
+                            <group string="Identification du Mandataire/Commissaire" colspan="2" >
                                 <group>
-                                    <field name="mandataire_id"  widget="many2one_tags" mode="tree,form">
-                                      
-                                </field>
-                            
+                                    <field name="mandataire_id" mode="kanban"/>
                                 </group>
-                                <!-- <group>
-                                    <field name="adresse_mandataire"/>
-                                    <field name="tel_mandataire"/>
-                                    <field name="fax_mandataire"/>
-                                    <field name="mail_mandataire"/> 
-                                    <field name="cin_rcs_mandataire"/>
-                                </group> -->
                             </group>
-                                   
-                            
                         </page>
 
                         <!-- Onglet Contacts -->
-                        <page string="Contacts">
+                        <page string="Représentant Légal et Contacts">
                             <group string="Contacts" colspan="2">
-                                <field name="contact_id" mode="kanban" context="{'default_type': 'other'}">
-                                    <kanban>
-                                        <field name="name"/>
-                                        <field name="email"/>
-                                        <field name="phone"/>
-                                        <templates>
-                                            <t t-name="card">
-                                                <div>
-                                                    <strong><field name="name"/></strong><br/>
-                                                    <field name="email"/><br/>
-                                                    <field name="phone"/>
-                                                </div>
-                                            </t>
-                                        </templates>
-                                    </kanban>
-                                </field>
-
+                                <group>
+                                    <field name="contact_id" mode="kanban"/>
+                                </group>
                             </group>
                         </page>
 

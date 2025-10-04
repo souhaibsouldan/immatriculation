@@ -1,0 +1,65 @@
+<odoo>
+    <record id="view_immatriculation_salarier_kanban" model="ir.ui.view">
+        <field name="name">immatriculation.salarier.kanban</field>
+        <field name="model">immatriculation.salarier</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="nom_prenom_salarie"/>
+                <field name="emploi_occupe"/>
+                <field name="salaire_brut"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="nom_prenom_salarie"/></strong><br/>
+                            <span><field name="emploi_occupe"/></span><br/>
+                            <span>Salaire: <field name="salaire_brut"/></span>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_immatriculation_salarier_tree" model="ir.ui.view">
+        <field name="name">immatriculation.salarier.tree</field>
+        <field name="model">immatriculation.salarier</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="nom_prenom_salarie"/>
+                <field name="emploi_occupe"/>
+                <field name="salaire_brut"/>
+                <field name="date_embauche"/>
+                <field name="matricule_cnss"/>
+                <field name="dos_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_immatriculation_salarier_form" model="ir.ui.view">
+        <field name="name">immatriculation.salarier.form</field>
+        <field name="model">immatriculation.salarier</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="dos_id"/>
+                        <field name="nom_prenom_salarie"/>
+                        <field name="emploi_occupe"/>
+                        <field name="salaire_brut"/>
+                        <field name="date_embauche"/>
+                        <field name="matricule_cnss"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_immatriculation_salarier" model="ir.actions.act_window">
+        <field name="name">Salariés Immatriculation</field>
+        <field name="res_model">immatriculation.salarier</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+  
+    <menuitem id="immatriculation_salarier" name="Liste Salariés" parent="immatriculation_menu" action="action_immatriculation_salarier" sequence="30"/>
+</odoo>

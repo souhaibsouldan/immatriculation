@@ -26,9 +26,10 @@ Long description of module's purpose
         'views/immatriculation.xml',
         'views/menu_general.xml',
         'views/centre_impot.xml',
-        # 'views/regime_fiscale.xml',
+        'views/mandataire.xml',
+        'views/regime_fiscale.xml',
         # 'views/activite.xml',
-        # 'views/salarier.xml',
+        'views/salarier.xml',
         
 
 
