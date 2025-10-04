@@ -1,2 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_immatriculation_fiscale,immatriculation.fiscale,model_immatriculation_fiscale,base.group_user,1,1,1,1
+access_immatriculation_mandataire,immatriculation.mandataire,model_immatriculation_mandataire,base.group_user,1,1,1,1
+access_immatriculation_mandataire,immatriculation.mandataire,model_immatriculation_mandataire,base.group_system,1,1,1,1
+access_immatriculation_activite,immatriculation.activite,model_immatriculation_activite,base.group_user,1,1,1,1
+access_immatriculation.salarier,immatriculation.salarier,model_immatriculation_salarier,base.group_user,1,1,1,1
+access_centre_impot,centre.impot,model_centre_impot,base.group_user,1,1,1,1
+access_regime_fiscale,regime.fiscale,model_regime_fiscale,base.group_user,1,1,1,1
